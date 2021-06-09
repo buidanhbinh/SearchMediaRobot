@@ -35,6 +35,12 @@ default_start_msg = """
 Here You Can Search Files In Inline Mode. Just Press SEARCH Button & Type Movie Name!
 """
 
+HELP_MSG = """
+🙋 Hey, You Can Use Me For Searching Any Media Files Like New Movies, Web Series, Cartoons From Inline Mode Across Telegram. Just Type My Username Anywhere In Telegram Message Box & Type Movies/Web Series/Cartoons Name To Search.
+
+**Example:** `@SearchMediaRobot Master 2021`
+ """
+
 START_MSG = environ.get('START_MSG', default_start_msg)
 SHARE_BUTTON_TEXT = 'Checkout {username} For Searching Media Files Like Movies, Web Series, Cartoons Etc. You Can Also Use This Bot In Inline Mode Any Where Of Telegram. \n\n©️ **@AsmSafone | @SafoTheBot !**'
 INVITE_MSG = environ.get('INVITE_MSG', 'Please Join @AsmSafone To Use Me!')

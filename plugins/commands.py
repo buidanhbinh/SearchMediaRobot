@@ -2,7 +2,7 @@ import os
 import logging
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from info import START_MSG, CHANNELS, ADMINS, INVITE_MSG
+from info import START_MSG, HELP_MSG, CHANNELS, ADMINS, INVITE_MSG
 from utils import Media
 
 logger = logging.getLogger(__name__)
@@ -15,11 +15,26 @@ async def start(bot, message):
         await message.reply(INVITE_MSG)
     else:
         buttons = [[
-            InlineKeyboardButton('Search Here', switch_inline_query_current_chat=''),
-            InlineKeyboardButton('Go Inline', switch_inline_query=''),
+            InlineKeyboardButton('🔍 Search Movies', switch_inline_query_current_chat=''),
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply(START_MSG, reply_markup=reply_markup)
+
+@Client.on_message(filters.command('help'))
+async def help(bot, message):
+    """Help command handler"""
+    if len(message.command) > 1 and message.command[1] == 'subscribe':
+        await message.reply(INVITE_MSG)
+    else:
+        buttons = [[
+        InlineKeyboardButton('Channel', url='https://t.me/AsmSafone'), 
+        InlineKeyboardButton('Developer', url='https://t.me/I_Am_Only_One_1'),
+    ],
+    [
+        InlineKeyboardButton('Join Support Group', url='https://t.me/SafoTheBot'),
+    ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await message.reply(HELP_MSG, reply_markup=reply_markup)
 
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
@@ -30,9 +45,9 @@ async def channel_info(bot, message):
     elif isinstance(CHANNELS, list):
         channels = CHANNELS
     else:
-        raise ValueError("Unexpected type of CHANNELS")
+        raise ValueError("Unexpected Type of CHANNELS")
 
-    text = '📑 **Indexed channels/groups**\n'
+    text = '📑 **Indexed Channels:**\n'
     for channel in channels:
         chat = await bot.get_chat(channel)
         if chat.username:
@@ -45,7 +60,7 @@ async def channel_info(bot, message):
     if len(text) < 4096:
         await message.reply(text)
     else:
-        file = 'Indexed channels.txt'
+        file = 'Indexed Channels.txt'
         with open(file, 'w') as f:
             f.write(text)
         await message.reply_document(file)
@@ -55,12 +70,12 @@ async def channel_info(bot, message):
 @Client.on_message(filters.command('total') & filters.user(ADMINS))
 async def total(bot, message):
     """Show total files in database"""
-    msg = await message.reply("Processing...⏳", quote=True)
+    msg = await message.reply("Processing... 🔄", quote=True)
     try:
         total = await Media.count_documents()
-        await msg.edit(f'📁 Saved files: {total}')
+        await msg.edit(f'📁 Saved Files: {total}')
     except Exception as e:
-        logger.exception('Failed to check total files')
+        logger.exception('Failed To Check Total Files!')
         await msg.edit(f'Error: {e}')
 
 
@@ -78,9 +93,9 @@ async def delete(bot, message):
     """Delete file from database"""
     reply = message.reply_to_message
     if reply and reply.media:
-        msg = await message.reply("Processing...⏳", quote=True)
+        msg = await message.reply("Processing... 🔄", quote=True)
     else:
-        await message.reply('Reply to file with /delete which you want to delete', quote=True)
+        await message.reply('Reply To File with /delete To Delete That!', quote=True)
         return
 
     for file_type in ("document", "video", "audio"):
@@ -88,7 +103,7 @@ async def delete(bot, message):
         if media is not None:
             break
     else:
-        await msg.edit('This is not supported file format')
+        await msg.edit('This Is Not Supported File Format!')
         return
 
     result = await Media.collection.delete_one({
@@ -98,6 +113,6 @@ async def delete(bot, message):
         'caption': reply.caption
     })
     if result.deleted_count:
-        await msg.edit('File is successfully deleted from database')
+        await msg.edit('File Is Successfully Deleted From Database!')
     else:
-        await msg.edit('File not found in database')
+        await msg.edit('File Is Not Found In Database!')

@@ -44,7 +44,7 @@ async def answer(bot, query):
             InlineQueryResultCachedDocument(
                 title=file.file_name,
                 file_id=file.file_id,
-                safone=f'{file.caption} \n\n➠➠➠ **@SearchMediaRobot**'
+                safone=f'{file.caption} \n\n➠➠➠ **@SearchMediaRobot**',
                 caption=safone,
                 description=f'Size: {get_size(file.file_size)} | {file.caption}',
                 reply_markup=reply_markup))

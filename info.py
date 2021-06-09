@@ -4,7 +4,7 @@ from os import environ
 id_pattern = re.compile(r'^.\d+$')
 
 # Bot information
-SESSION = environ.get('SESSION', 'Media_search')
+SESSION = environ.get('SESSION', 'Media_Search')
 USER_SESSION = environ.get('USER_SESSION', 'User_Bot')
 API_ID = int(environ['API_ID'])
 API_HASH = environ['API_HASH']
@@ -30,11 +30,11 @@ COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 
 # Messages
 default_start_msg = """
-**Hi, I'm Media Search bot**
+**Hi, I'm Telegram Movie Search Bot**
 
-Here you can search files in inline mode. Just press following buttons and start searching.
+Here You Can Search Files In Inline Mode. Just Press SEARCH Button & Type Movie Name!
 """
 
 START_MSG = environ.get('START_MSG', default_start_msg)
-SHARE_BUTTON_TEXT = 'Checkout {username} for searching files'
-INVITE_MSG = environ.get('INVITE_MSG', 'Please join @.... to use this bot')
+SHARE_BUTTON_TEXT = 'Checkout {username} For Searching Media Files Like Movies, Web Series, Cartoons Etc. You Can Also Use This Bot In Inline Mode Any Where Of Telegram. \n\n©️ **@AsmSafone | @SafoTheBot !**'
+INVITE_MSG = environ.get('INVITE_MSG', 'Please Join @AsmSafone To Use Me!')

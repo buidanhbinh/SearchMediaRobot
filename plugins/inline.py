@@ -19,7 +19,7 @@ async def answer(bot, query):
     if AUTH_CHANNEL and not await is_subscribed(bot, query):
         await query.answer(results=[],
                            cache_time=0,
-                           switch_pm_text='You have to subscribe channel',
+                           switch_pm_text='Subscribe To Updates Channel First!',
                            switch_pm_parameter="subscribe")
         return
 
@@ -49,9 +49,9 @@ async def answer(bot, query):
                 reply_markup=reply_markup))
 
     if results:
-        switch_pm_text = f"{emoji.FILE_FOLDER} Results"
+        switch_pm_text = f"{emoji.FILE_FOLDER} Search Results"
         if string:
-            switch_pm_text += f" for {string}"
+            switch_pm_text += f" of {string}"
 
         await query.answer(results=results,
                            cache_time=cache_time,
@@ -60,7 +60,7 @@ async def answer(bot, query):
                            next_offset=str(next_offset))
     else:
 
-        switch_pm_text = f'{emoji.CROSS_MARK} No results'
+        switch_pm_text = f'{emoji.CROSS_MARK} No Results Found'
         if string:
             switch_pm_text += f' for "{string}"'
 
@@ -72,10 +72,10 @@ async def answer(bot, query):
 
 def get_reply_markup(username, query):
     url = 't.me/share/url?url=' + quote(SHARE_BUTTON_TEXT.format(username=username))
-    buttons = [[
-        InlineKeyboardButton('Search again', switch_inline_query_current_chat=query),
-        InlineKeyboardButton('Share bot', url=url),
-    ]]
+    buttons = [
+        [InlineKeyboardButton('Search Again', switch_inline_query_current_chat=query)],
+        [InlineKeyboardButton('Share Friends', url=url)]
+    ]
     return InlineKeyboardMarkup(buttons)
 
 

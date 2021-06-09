@@ -42,5 +42,5 @@ HELP_MSG = """
  """
 
 START_MSG = environ.get('START_MSG', default_start_msg)
-SHARE_BUTTON_TEXT = 'Checkout {username} For Searching Media Files Like Movies, Web Series, Cartoons Etc. You Can Also Use This Bot In Inline Mode Any Where Of Telegram. \n\n©️ **@AsmSafone | @SafoTheBot !**'
+SHARE_BUTTON_TEXT = '🙋 Hey Bruh, Checkout **{username}** For Searching Media Files Like Movies, Web Series, Cartoons Etc. You Can Also Use This Bot In Inline Mode On Any Chat Of Telegram.'
 INVITE_MSG = environ.get('INVITE_MSG', 'Please Join @AsmSafone To Use Me!')
